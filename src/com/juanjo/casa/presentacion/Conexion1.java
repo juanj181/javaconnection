@@ -4,6 +4,8 @@
  */
 package com.juanjo.casa.presentacion;
 
+import com.juanjo.casa.datos.BussinesException;
+import com.juanjo.casa.datos.BussinessMessage;
 import com.juanjo.casa.datos.PeliculaDAO;
 import com.juanjo.casa.datos.LibroDAO;
 import com.juanjo.casa.datos.PeliculaDAOImplHibernate;
@@ -27,7 +29,7 @@ public class Conexion1 {
     public static void main(String[] args) {
         Pelicula pelicula = new Pelicula();        
         pelicula.setIdPelicula(6);
-        pelicula.setTitulo(null);
+        pelicula.setTitulo("El pianista");
         
         
         
@@ -44,9 +46,12 @@ public class Conexion1 {
         peliculaDAO.insert(pelicula);
          
        // libroDAO.insert(libro);
-        } catch (ConstraintViolationException cve) {
+        } catch (BussinessException be) {
         //    session.getTransaction().rollback();
-            System.out.println("No se ha podido insertar el profesor");
+            System.out.println("No se ha podido insertar la pelicula");
+            for(BussinessMessage bussinesMessage : be.getBussinessMessages()){
+                System.out.println(bussinesMessage.getFieldName()+"-"+bussinessMessage.getMessage());
+            }
         }
     }
 }
