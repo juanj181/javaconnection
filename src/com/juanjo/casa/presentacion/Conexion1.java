@@ -45,7 +45,7 @@ public class Conexion1 {
          
        // libroDAO.insert(libro);
         } catch (ConstraintViolationException cve) {
-            session.getTransaction().rollback();
+        //    session.getTransaction().rollback();
             System.out.println("No se ha podido insertar el profesor");
         }
     }
