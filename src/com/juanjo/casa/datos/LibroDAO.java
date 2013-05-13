@@ -13,10 +13,10 @@ import java.util.Map;
  */
 public interface LibroDAO {
     Libro create();
-    void insert(Libro libro);
-    Libro get(int idLibro);
-    void update(Libro libro);
-    void delete (int idLibro);
-    List<Libro> find(Map<String, Object> filter);
+    void insert(Libro libro) throws BussinessException;
+    Libro get(int idLibro) throws BussinessException;
+    void update(Libro libro) throws BussinessException;
+    void delete (int idLibro) throws BussinessException;
+    List<Libro> find(Map<String, Object> filter) throws BussinessException;
     
 }

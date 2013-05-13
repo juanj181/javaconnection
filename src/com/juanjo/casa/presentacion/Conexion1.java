@@ -4,10 +4,11 @@
  */
 package com.juanjo.casa.presentacion;
 
-import com.juanjo.casa.datos.BussinesException;
+import com.juanjo.casa.datos.BussinessException;
 import com.juanjo.casa.datos.BussinessMessage;
 import com.juanjo.casa.datos.PeliculaDAO;
 import com.juanjo.casa.datos.LibroDAO;
+import com.juanjo.casa.datos.LibroDAOImplHibernate;
 import com.juanjo.casa.datos.PeliculaDAOImplHibernate;
 import com.juanjo.casa.datos.PeliculaDAOImplJDBC;
 import com.juanjo.casa.datos.LibroDAOImplJDBC;
@@ -40,17 +41,17 @@ public class Conexion1 {
         ApplicationContext context =new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         
         try{
-        PeliculaDAO peliculaDAO = new PeliculaDAOImplHibernate();
-      //  LibroDAO libroDAO = new LibroDAOImplJDBC();  
-     //   peliculaDAO.delete(6);
+        PeliculaDAO peliculaDAO = context.getBean(PeliculaDAO.class);
+        LibroDAO libroDAO = context.getBean(LibroDAO.class);  
+        peliculaDAO.delete(6);
         peliculaDAO.insert(pelicula);
          
-       // libroDAO.insert(libro);
+        libroDAO.insert(libro);
         } catch (BussinessException be) {
-        //    session.getTransaction().rollback();
+        
             System.out.println("No se ha podido insertar la pelicula");
-            for(BussinessMessage bussinesMessage : be.getBussinessMessages()){
-                System.out.println(bussinesMessage.getFieldName()+"-"+bussinessMessage.getMessage());
+            for(BussinessMessage bussinessMessage : be.getBussinessMessages()){
+                System.out.println(bussinessMessage.getFieldName()+"-"+bussinessMessage.getMessage());
             }
         }
     }

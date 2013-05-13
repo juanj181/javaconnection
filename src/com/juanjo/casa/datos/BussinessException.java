@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author alumno
  */
-public class BussinesException extends Exception{
+public class BussinessException extends Exception{
     
     private List<BussinessMessage> bussinessMessages = new ArrayList<BussinessMessage>();
 

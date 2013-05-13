@@ -14,10 +14,10 @@ import java.util.Map;
  */
 public interface PeliculaDAO {
     Pelicula create();
-    void insert(Pelicula pelicula);
-    Pelicula get(int idPelicula);
-    void update(Pelicula pelicula);
-    void delete(int idPelicula);
-    List<Pelicula> find(Map<String,Object> filter); 
+    void insert(Pelicula pelicula) throws BussinessException;
+    Pelicula get(int idPelicula) throws BussinessException;
+    void update(Pelicula pelicula) throws BussinessException;
+    void delete(int idPelicula) throws BussinessException;
+    List<Pelicula> find(Map<String,Object> filter) throws BussinessException; 
 }
 

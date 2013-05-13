@@ -18,6 +18,8 @@ import org.hibernate.service.ServiceRegistryBuilder;
  * @author Administrador
  */
 public class PeliculaDAOImplHibernate implements PeliculaDAO {
+    
+    private SessionFactory sessionFactory;
 
     @Override
     public Pelicula create() {
@@ -25,7 +27,7 @@ public class PeliculaDAOImplHibernate implements PeliculaDAO {
     }
 
     @Override
-    public void insert(Pelicula pelicula) {
+    public void insert(Pelicula pelicula)  throws BussinessException{
         Session session = getSession();
         session.beginTransaction();
         session.save(pelicula); //<|--- Aqui guardamos el objeto en la base de datos.
@@ -66,15 +68,7 @@ public class PeliculaDAOImplHibernate implements PeliculaDAO {
     }
 
     private Session getSession() {
-        SessionFactory sessionFactory;
-
-        Configuration configuration = new Configuration();
-        configuration.configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-        Session session = sessionFactory.openSession();
-
+        Session session = sessionFactory.getCurrentSession();
         return session;
     }
 }

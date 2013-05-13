@@ -13,13 +13,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Administrador
  */
 public class LibroDAOImplHibernate implements LibroDAO {
-
+    
+    @Autowired
+    private SessionFactory sessionFactory;
     
     @Override
     public Libro create() {
@@ -73,14 +76,7 @@ public class LibroDAOImplHibernate implements LibroDAO {
     }
 
     private Session getSession() {
-        SessionFactory sessionFactory;
-
-        Configuration configuration = new Configuration();
-        configuration.configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
         return session;
     }
